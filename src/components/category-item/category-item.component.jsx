@@ -1,6 +1,8 @@
 import "./category-item.styles.scss";
 
 export default function CategoryItem({ category }) {
+  // Creates a store category based on the information given from directory
+
   const { title, imageUrl } = category;
 
   return (
