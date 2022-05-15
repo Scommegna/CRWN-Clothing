@@ -4,6 +4,7 @@ import {
   signInWithRedirect,
   signInWithPopup,
   GoogleAuthProvider,
+  createUserWithEmailAndPassword,
 } from "firebase/auth";
 
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
@@ -21,22 +22,28 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig);
 
 // Google provider for login with google with popup
-const provider = new GoogleAuthProvider();
-provider.setCustomParameters({
+const googleProvider = new GoogleAuthProvider();
+googleProvider.setCustomParameters({
   prompt: "select_account",
 });
 
 export const auth = getAuth();
-export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
+export const signInWithGooglePopup = () =>
+  signInWithPopup(auth, googleProvider);
+export const signInWithGoogleRedirect = () =>
+  signInWithRedirect(auth, googleProvider);
 
 // Database
 export const db = getFirestore();
 
 // Creates a document with the logged user data
-export const createUserDocumentFromAuth = async function (userAuth) {
-  const userDocRef = doc(db, "users", userAuth.uid);
+export const createUserDocumentFromAuth = async function (
+  userAuth,
+  additionalInformation = {}
+) {
+  if (!userAuth) return;
 
-  console.log(userDocRef);
+  const userDocRef = doc(db, "users", userAuth.uid);
 
   const userSnapshot = await getDoc(userDocRef);
   console.log(userSnapshot);
@@ -50,6 +57,7 @@ export const createUserDocumentFromAuth = async function (userAuth) {
         displayName,
         email,
         createdAt,
+        ...additionalInformation,
       });
     } catch (error) {
       console.log("error creating user", error.message);
@@ -57,4 +65,14 @@ export const createUserDocumentFromAuth = async function (userAuth) {
   }
 
   return userDocRef;
+};
+
+// Provider for creating user with email and password
+export const createAuthUserWithEmailAndPassword = async function (
+  email,
+  password
+) {
+  if (!email || !password) return;
+
+  return await createUserWithEmailAndPassword(auth, email, password);
 };
