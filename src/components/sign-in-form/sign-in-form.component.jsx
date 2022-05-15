@@ -28,8 +28,7 @@ export default function SignInForm() {
 
   // Sign in button to log in with google account
   const signInWithGoogle = async function () {
-    const { user } = await signInWithGooglePopup();
-    await createUserDocumentFromAuth(user);
+    await signInWithGooglePopup();
   };
 
   // Receives form fields info and signs in the user
@@ -37,7 +36,7 @@ export default function SignInForm() {
     event.preventDefault();
 
     try {
-      const response = await signInAuthUserWithEmailAndPassword(
+      const { user } = await signInAuthUserWithEmailAndPassword(
         email,
         password
       );
