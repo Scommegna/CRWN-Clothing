@@ -5,11 +5,10 @@
 
 <p align="center">
   <br>
-  <img src="https://img.shields.io/github/languages/top/Scommegna/coders-news">
-  <img src="https://img.shields.io/github/issues/Scommegna/coders-news">
-  <img src="https://img.shields.io/github/forks/Scommegna/coders-news">
-  <img src="https://img.shields.io/github/stars/Scommegna/coders-news">
-  <img src="https://img.shields.io/github/license/Scommegna/coders-news">
+  <img src="https://img.shields.io/github/issues/Scommegna/CRWN-Clothing">
+  <img src="https://img.shields.io/github/forks/Scommegna/CRWN-Clothing">
+  <img src="https://img.shields.io/github/stars/Scommegna/CRWN-Clothing">
+  <img src="https://img.shields.io/badge/license-MIT-blue">
 </p>
 
 <h4 align="center">
